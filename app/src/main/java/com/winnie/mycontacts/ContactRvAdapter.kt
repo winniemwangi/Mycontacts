@@ -40,6 +40,9 @@ class ContactRvAdapter (var contactList: List<Contact>): RecyclerView.Adapter<Co
             val intent = Intent(context,ViewContact::class.java)
             intent.putExtra("NAME",currentContact.name)
             intent.putExtra("ADDRESS",currentContact.address)
+            intent.putExtra("EMAIL",currentContact.email)
+            intent.putExtra("PHONENUMBER",currentContact.phoneNumber)
+            intent.putExtra("IMAGE",currentContact.image)
             context.startActivity(intent)
         }
     }

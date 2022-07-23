@@ -15,7 +15,7 @@ import com.winnie.mycontacts.databinding.ActivityViewContactBinding
 //intent, including the image. Add icons for call and sms to the view contact layout
 
 class ViewContact : AppCompatActivity() {
-    lateinit var bindingView : ActivityViewContactBinding
+    lateinit var bindingView: ActivityViewContactBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bindingView = ActivityViewContactBinding.inflate(layoutInflater)
@@ -23,34 +23,27 @@ class ViewContact : AppCompatActivity() {
         getExtras()
     }
 
-//    fun getExtras(){
-//        var name = intent.extras?.getString("NAME")
-//        var address = intent.extras?.getString("ADDRESS")
-//        Toast.makeText(this,name, Toast.LENGTH_LONG).show()
-//    }
-
     fun getExtras(){
-        val actionBar: ActionBar? = supportActionBar
-        actionBar!!.setDisplayHomeAsUpEnabled(true)
-        actionBar!!.setDisplayShowHomeEnabled(true)
+        var name = intent.extras?.getString("NAME")
+        var address = intent.extras?.getString("ADDRESS")
+        var email = intent.extras?.getString("EMAIL")
+        var phoneNumber = intent.extras?.getString("PHONENUMBER")
+        var image = bindingView.imgProfile
 
-        val extras = intent
-        var name = extras.getStringExtra("NAME")
-        var phone = extras.getStringExtra("PHONE")
-        var email = extras.getStringExtra("EMAIL")
-        var address = extras.getStringExtra("ADDRESS")
+        Toast.makeText(this,name, Toast.LENGTH_LONG).show()
 
-//        var image = bindingView.
-//        actionBar.setTitle(name)
-//        bindingView.tvN.text = name
-//        bindingView.tvNumber.text = phone
-//        bindingView.tvEmailOne.text = email
-//        bindingView.tvAddress.text = address
-//
-//        Picasso.get()
-//            .load(intent.getStringExtra("PROFILE"))
-//            .networkPolicy(NetworkPolicy.OFFLINE)
-//            .into(image)
+
+        bindingView.tvEmail1.text=email
+        bindingView.tvPhone1.text=phoneNumber
+        bindingView.tvContacName.text=name
+        bindingView.tvLocation.text=address
+
+
+        Picasso.get().load(intent.getStringExtra("IMAGE")).resize(200,200).centerCrop().into(bindingView.imgProfile)
+
+
 
     }
+
+
 }
