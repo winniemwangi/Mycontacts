@@ -1,10 +1,12 @@
 package com.winnie.mycontacts
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.view.menu.ListMenuItemView
 import androidx.appcompat.view.menu.MenuView
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +21,7 @@ class ContactRvAdapter (var contactList: List<Contact>): RecyclerView.Adapter<Co
         return ContactViewHolder(binding)
 
     }
-
+    //http - system that governs communication between client and server
     // recycler view display each item in their row
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
@@ -29,6 +31,17 @@ class ContactRvAdapter (var contactList: List<Contact>): RecyclerView.Adapter<Co
         holder.binding.tvEmail.text = currentContact.email
         holder.binding.tvAddress.text = currentContact.address
         Picasso.get().load(currentContact.image).placeholder(R.drawable.ic_baseline_person_24).resize(200,200).centerCrop().into(holder.binding.imgContact)
+
+        val context = holder.itemView.context
+        holder.binding.imgContact.setOnClickListener {
+            Toast.makeText(context,"You've clicked the image", Toast.LENGTH_SHORT).show()
+        }
+        holder.binding.cvContact.setOnClickListener {
+            val intent = Intent(context,ViewContact::class.java)
+            intent.putExtra("NAME",currentContact.name)
+            intent.putExtra("ADDRESS",currentContact.address)
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
